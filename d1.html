@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stock Prediction App</title>
+  <link rel="stylesheet" href="d1.css">
+</head>
+<body>
+  <header>
+    <h1>Stock Prediction App</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Predictions</a></li>
+        <li><a href="#">About</a></li>
+        <!-- Add more navigation links as needed -->
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <h2>Search Stocks</h2>
+      <input type="text" id="stockInput" placeholder="Enter stock symbol">
+      <button onclick="predictStock()">Predict</button>
+    </section>
+
+    <section class="prediction-results">
+      <h2>Prediction Results</h2>
+      <div id="predictionOutput"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Stock Prediction App</p>
+  </footer>
+
+  <script src="d1.js"></script>
+</body>
+</html>
