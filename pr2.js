@@ -1,30 +1,16 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+from flask import Flask, request, jsonify
 
-// Middleware to parse JSON data
-app.use(bodyParser.json());
+app = Flask(__name__)
 
-// Mock user authentication endpoint
-app.post('/login', (req, res) => {
-    // Mock user authentication (replace with actual user authentication logic)
-    const { username, password } = req.body;
-    if (username === 'user' && password === 'password') {
-        res.json({ success: true, message: 'Login successful' });
-    } else {
-        res.status(401).json({ success: false, message: 'Invalid credentials' });
-    }
-});
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Implement code to process CNN prediction here
+    # Receive data from request
+    data = request.json  # Example: {"stock_data": [..data..]}
+    # Use the CNN algorithm to predict
+    prediction = cnn_predict_function(data)
+    return jsonify({'prediction': prediction})
 
-// Mock stock prediction endpoint
-app.post('/predict', (req, res) => {
-    // Mock CNN prediction (replace with actual ML model prediction)
-    const { username } = req.body;
-    const prediction = { result: 'Increase in stock prices' }; // Example prediction
-    res.json(prediction);
-});
+if __name__ == '__main__':
+    app.run(debug=True)
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
