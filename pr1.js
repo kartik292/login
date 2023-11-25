@@ -1,31 +1,34 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    // Mocking API call to the backend (replace with your actual backend endpoint)
-    fetch('/login', {
+// js
+function getStockPrediction(stockData) {
+    fetch('/predict', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ 'stock_data': stockData }),
     })
     .then(response => response.json())
     .then(data => {
-        // Mocking stock prediction (replace with actual ML model integration)
-        fetch('/predict', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username }) // Pass username to get personalized prediction
-        })
-        .then(response => response.json())
-        .then(prediction => {
-            document.getElementById('predictionResult').innerText = `Today's Stock Prediction: ${prediction.result}`;
-        })
-        .catch(error => console.error('Error:', error));
+        // Handle the prediction response here
+        displayPrediction(data.prediction);
     })
-    .catch(error => console.error('Error:', error));
-});
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+// html css
+
+<input type="text" id="stockData" placeholder="Enter stock data">
+<button onclick="predictStock()">Predict</button>
+<div id="predictionResult"></div>
+function predictStock() {
+    const stockData = document.getElementById('stockData').value;
+    getStockPrediction(stockData);
+}
+
+function displayPrediction(prediction) {
+    const resultDiv = document.getElementById('predictionResult');
+    resultDiv.innerHTML = `Predicted stock: ${prediction}`;
+}
